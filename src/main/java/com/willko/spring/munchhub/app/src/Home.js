@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import AppNavbar from './AppNavbar';
-import { Link } from 'react-router-dom';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 
 class Home extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <AppNavbar/>
-                <Container fluid>
-                    <Button color="link"><Link to="/groups">Manage JUG Tour</Link></Button>
+                <header >
+                <Container fluid class="container" >
+                    <Button color="link" class="vertical-center"><Link to="/groups">Manage Restaurants</Link></Button>
                 </Container>
+                </header>
             </div>
         );
     }

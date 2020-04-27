@@ -67,7 +67,7 @@ class GroupList extends Component {
                     <div className="float-right">
                         <Button color="success" tag={Link} to="/groups/new">Add Group</Button>
                     </div>
-                    <h3>My JUG Tour</h3>
+                    <h3>Restaurants</h3>
                     <Table className="mt-4">
                         <thead>
                         <tr>

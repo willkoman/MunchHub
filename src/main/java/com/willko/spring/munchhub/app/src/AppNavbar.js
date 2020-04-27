@@ -26,7 +26,7 @@ export default class AppNavbar extends Component {
                             href="https://twitter.com/WillkoOfficial" target="_blank">@WillkoOfficial</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="https://github.com/Willkoman" target="_blank">GitHub</NavLink>
+                        <NavLink href="https://github.com/Willkoman/MunchHub" target="_blank">GitHub</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
