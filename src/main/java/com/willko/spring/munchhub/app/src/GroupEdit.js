@@ -71,12 +71,12 @@ class GroupEdit extends Component {
                     <FormGroup>
                         <Label for="address">Address</Label>
                         <Input type="text" name="address" id="address" value={item.address || ''}
-                               onChange={this.handleChange} autoComplete="address-level1"/>
+                               onChange={this.handleChange} autoComplete="street-address"/>
                     </FormGroup>
                     <FormGroup>
                         <Label for="city">City</Label>
                         <Input type="text" name="city" id="city" value={item.city || ''}
-                               onChange={this.handleChange} autoComplete="address-level1"/>
+                               onChange={this.handleChange} autoComplete="address-level2"/>
                     </FormGroup>
                     <div className="row">
                         <FormGroup className="col-md-4 mb-3">
@@ -87,12 +87,12 @@ class GroupEdit extends Component {
                         <FormGroup className="col-md-5 mb-3">
                             <Label for="country">Country</Label>
                             <Input type="text" name="country" id="country" value={item.country || ''}
-                                   onChange={this.handleChange} autoComplete="address-level1"/>
+                                   onChange={this.handleChange} autoComplete="country"/>
                         </FormGroup>
                         <FormGroup className="col-md-3 mb-3">
                             <Label for="country">Postal Code</Label>
                             <Input type="text" name="postalCode" id="postalCode" value={item.postalCode || ''}
-                                   onChange={this.handleChange} autoComplete="address-level1"/>
+                                   onChange={this.handleChange} autoComplete="postal-code"/>
                         </FormGroup>
                     </div>
                     <FormGroup>
