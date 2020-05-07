@@ -1,0 +1,6 @@
+2020-05-07 12:24:14 jdbc[114]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].ROLES"; expected "INSERT"; SQL statement:
+INFORMATION_SCHEMA.ROLES [42001-200]
+2020-05-07 12:24:45 jdbc[114]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLES" not found; SQL statement:
+SELECT * FROM ROLES [42102-200]

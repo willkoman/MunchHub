@@ -44,13 +44,7 @@ class GroupList extends Component {
             return <tr key={group.id}>
                 <td style={{whiteSpace: 'nowrap'}}>{group.name}</td>
                 <td>{address}</td>
-                <td>{group.events.map(event => {
-                    return <div key={event.id}>{new Intl.DateTimeFormat('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: '2-digit'
-                    }).format(new Date(event.date))}: {event.title}</div>
-                })}</td>
+                <td>{group.cuisineType}</td>
                 <td>
                     <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={"/groups/" + group.id}>Edit</Button>
@@ -73,7 +67,7 @@ class GroupList extends Component {
                         <tr>
                             <th width="20%">Name</th>
                             <th width="20%">Location</th>
-                            <th>Events</th>
+                            <th>Cuisine Type(s)</th>
                             <th width="10%">Actions</th>
                         </tr>
                         </thead>

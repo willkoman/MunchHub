@@ -12,8 +12,8 @@ import java.util.Set;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "user_group")
-public class Group {
+@Table(name = "restaurant")
+public class Restaurant {
 
     @Id
     @GeneratedValue
@@ -25,11 +25,11 @@ public class Group {
     private String stateOrProvince;
     private String country;
     private String postalCode;
+    private String cuisineType;
     @ManyToOne(cascade=CascadeType.PERSIST)
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<Event> events;
+
 
     public Long getId() {
         return id;

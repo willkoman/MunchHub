@@ -90,9 +90,16 @@ class GroupEdit extends Component {
                                    onChange={this.handleChange} autoComplete="country"/>
                         </FormGroup>
                         <FormGroup className="col-md-3 mb-3">
-                            <Label for="country">Postal Code</Label>
+                            <Label for="postalCode">Postal Code</Label>
                             <Input type="text" name="postalCode" id="postalCode" value={item.postalCode || ''}
                                    onChange={this.handleChange} autoComplete="postal-code"/>
+                        </FormGroup>
+                    </div>
+                    <div className="row">
+                        <FormGroup className="col-md-3 mb-3">
+                            <Label for="cuisineType">Cuisine Type</Label>
+                            <Input type="text" name="cuisineType" id="cuisineType" value={item.cuisineType || ''}
+                                   onChange={this.handleChange} autoComplete="cuisineType"/>
                         </FormGroup>
                     </div>
                     <FormGroup>
