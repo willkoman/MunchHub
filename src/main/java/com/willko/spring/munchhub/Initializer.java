@@ -1,8 +1,11 @@
 package com.willko.spring.munchhub;
 
+import com.willko.spring.munchhub.model.Restaurant;
 import com.willko.spring.munchhub.model.RestaurantRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Stream;
 
 @Component
 class Initializer implements CommandLineRunner {
@@ -15,19 +18,15 @@ class Initializer implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
+
 //        Stream.of("McSpankies", "Krusty Shack", "Sushi Supreme",
 //                "Tasty Cream").forEach(name ->
-//                repository.save(new Group(name))
+//                repository.save(new Restaurant(name))
 //        );
-//
-//        Group djug = repository.findByName("McSpankies");
-//        Event e = Event.builder().title("Full Stack Reactive")
-//                .description("Reactive with Spring Boot + React")
-//                .date(Instant.parse("2020-04-27T12:54:00.000Z"))
-//                .build();
-//        djug.setEvents(Collections.singleton(e));
+//        Restaurant djug = repository.findByName("McSpankies");
 //        repository.save(djug);
 
         repository.findAll().forEach(System.out::println);
+
     }
 }

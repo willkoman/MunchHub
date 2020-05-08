@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
+
 class GroupEdit extends Component {
 
     emptyItem = {
@@ -30,6 +31,7 @@ class GroupEdit extends Component {
         }
     }
 
+
     handleChange(event) {
         const target = event.target;
         const value = target.value;
@@ -56,7 +58,7 @@ class GroupEdit extends Component {
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Group' : 'Add Group'}</h2>;
+        const title = <h2>{item.id ? 'Edit Restaurant' : 'Add Restaurant'}</h2>;
 
         return <div>
             <AppNavbar/>
@@ -107,6 +109,7 @@ class GroupEdit extends Component {
                         <Button color="secondary" tag={Link} to="/groups">Cancel</Button>
                     </FormGroup>
                 </Form>
+
             </Container>
         </div>
     }

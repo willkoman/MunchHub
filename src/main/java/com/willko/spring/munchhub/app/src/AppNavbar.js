@@ -16,8 +16,16 @@ export default class AppNavbar extends Component {
     }
 
     render() {
-        return <Navbar color="dark" dark expand="md">
-            <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+        return <Navbar color="light" light expand="md" sticky="top">
+            <NavbarBrand tag={Link} to="/"><img
+                alt=""
+                src="/logo.png"
+                width="45"
+                height="45"
+                className="d-inline-block align-bottom"
+            />{' '}
+            <b>MunchHub</b>
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>

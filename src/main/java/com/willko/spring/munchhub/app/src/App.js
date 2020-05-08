@@ -11,7 +11,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact={true} component={Home}/>
             <Route path='/groups' exact={true} component={GroupList}/>
-              <Route path='/groups/:id' component={GroupEdit}/>
+            <Route path='/groups/:id' component={GroupEdit}/>
           </Switch>
         </Router>
     )

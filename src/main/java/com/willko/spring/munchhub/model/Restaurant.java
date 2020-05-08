@@ -16,7 +16,7 @@ import java.util.Set;
 public class Restaurant {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String name;
@@ -26,6 +26,7 @@ public class Restaurant {
     private String country;
     private String postalCode;
     private String cuisineType;
+    private String imagePath;
     @ManyToOne(cascade=CascadeType.PERSIST)
     private User user;
 
