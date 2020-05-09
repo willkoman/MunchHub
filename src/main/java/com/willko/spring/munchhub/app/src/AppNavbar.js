@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavDropdown, NavItem, NavLink} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class AppNavbar extends Component {
@@ -16,7 +16,7 @@ export default class AppNavbar extends Component {
     }
 
     render() {
-        return <Navbar color="light" light expand="md" sticky="top">
+        return <Navbar  expand="md" >
             <NavbarBrand tag={Link} to="/"><img
                 alt=""
                 src="/logo.png"
@@ -26,9 +26,10 @@ export default class AppNavbar extends Component {
             />{' '}
             <b>MunchHub</b>
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggle}/>
+            <NavbarToggler border-color={""}onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
+
                     <NavItem>
                         <NavLink
                             href="https://twitter.com/WillkoOfficial" target="_blank">@WillkoOfficial</NavLink>
@@ -36,6 +37,7 @@ export default class AppNavbar extends Component {
                     <NavItem>
                         <NavLink href="https://github.com/Willkoman/MunchHub" target="_blank">GitHub</NavLink>
                     </NavItem>
+
                 </Nav>
             </Collapse>
         </Navbar>;

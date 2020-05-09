@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
-
+import ImageUploader from 'react-images-upload';
 
 class GroupEdit extends Component {
 
@@ -18,18 +18,43 @@ class GroupEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: this.emptyItem
+            item: this.emptyItem,
+            pictures: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.onDrop = this.onDrop.bind(this);
+    }
+
+    onDrop(pictureFiles) {
+        if (pictureFiles.length > 0) {
+            let index = pictureFiles.length - 1;
+            let formData = new FormData();
+            formData.append('file', pictureFiles[index], pictureFiles[index].name);
+
+            const {item} = this.state;
+
+            fetch(`/api/upload/${this.props.match.params.id}`, {
+                method: (item.id) ? 'POST' : 'POST',
+                body: (formData)
+            }).then(res => {
+                if (res.ok) {
+                    console.log(res.data);
+                    alert("File "+item.id+" uploaded successfully.")
+                }
+
+            });
+        }
     }
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const group = await (await fetch(`/api/group/${this.props.match.params.id}`)).json();
+            const group = await (await fetch(`/api/restaurant/${this.props.match.params.id}`)).json();
             this.setState({item: group});
         }
     }
+
 
 
     handleChange(event) {
@@ -45,7 +70,7 @@ class GroupEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/group/{id}', {
+        await fetch('/api/restaurant/{id}', {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -53,7 +78,7 @@ class GroupEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/groups');
+        this.props.history.push('/restaurants');
     }
 
     render() {
@@ -104,9 +129,19 @@ class GroupEdit extends Component {
                                    onChange={this.handleChange} autoComplete="cuisineType"/>
                         </FormGroup>
                     </div>
+                    <div id="noEdit">
+                    <ImageUploader
+                        withIcon={true}
+                        buttonText='Upload Restaurant Image'
+                        onChange={this.onDrop}
+                        label='Max File Size: 3MB, accepted: jpg'
+                        imgExtension={['.jpg']}
+                        maxFileSize={3000000}
+                    />
+                    </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/groups">Cancel</Button>
+                        <Button color="secondary" tag={Link} to="/restaurants">Cancel</Button>
                     </FormGroup>
                 </Form>
 

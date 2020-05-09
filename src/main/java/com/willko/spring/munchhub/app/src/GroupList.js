@@ -14,13 +14,13 @@ class GroupList extends Component {
     componentDidMount() {
         this.setState({isLoading: true});
 
-        fetch('api/groups')
+        fetch('api/restaurants')
             .then(response => response.json())
             .then(data => this.setState({groups: data, isLoading: false}));
     }
 
     async remove(id) {
-        await fetch(`/api/group/${id}`, {
+        await fetch(`/api/restaurant/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -68,7 +68,7 @@ class GroupList extends Component {
                         <p className="card-text text-center"><i>Cuisine Type: <b>{group.cuisineType}</b></i></p>
                         <Button size="md" color="success" className="float-left" >Order Now</Button>
                         <ButtonGroup className="float-right" >
-                            <Button size="sm" color="primary" tag={Link} to={"/groups/" + group.id}>Edit</Button>
+                            <Button size="sm" color="primary" tag={Link} to={"/restaurants/" + group.id}>Edit</Button>
                             <Button size="sm" color="danger" onClick={() => this.remove(group.id)}>Delete</Button>
                         </ButtonGroup>
 
@@ -83,7 +83,7 @@ class GroupList extends Component {
                 <AppNavbar/>
                 <Container>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/groups/new">Add Restaurant</Button>
+                        <Button color="success" tag={Link} to="/restaurants/new">Add Restaurant</Button>
                     </div>
                     <h3>Restaurants</h3>
 

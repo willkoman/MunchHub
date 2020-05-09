@@ -29,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/java/com/willko/spring/munchhub/app/node_modules/
