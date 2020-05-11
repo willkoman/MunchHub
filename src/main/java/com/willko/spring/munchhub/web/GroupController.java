@@ -1,5 +1,6 @@
 package com.willko.spring.munchhub.web;
 
+import com.willko.spring.munchhub.model.MenuItem;
 import com.willko.spring.munchhub.model.Restaurant;
 import com.willko.spring.munchhub.model.RestaurantRepository;
 import org.slf4j.Logger;
@@ -44,6 +45,15 @@ class GroupController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/restaurant/{id}/menu")
+    ResponseEntity<?> getMenu(@PathVariable Long id) {
+        Optional<Restaurant> group = restaurantRepository.findById(id);
+        log.info(group.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)).toString());
+        return group.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping("/restaurant/{id}")
     ResponseEntity<Restaurant> createGroup(@Valid @RequestBody Restaurant restaurant) throws URISyntaxException {
         log.info("Request to create group: {}", restaurant);
@@ -54,6 +64,13 @@ class GroupController {
 
     @PutMapping("/restaurant/{id}")
     ResponseEntity<Restaurant> updateGroup(@Valid @RequestBody Restaurant restaurant) {
+        log.info("Request to update group: {}", restaurant);
+        Restaurant result = restaurantRepository.save(restaurant);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PutMapping("/restaurant/{id}/order")
+    ResponseEntity<Restaurant> orderGroup(@Valid @RequestBody Restaurant restaurant) {
         log.info("Request to update group: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.ok().body(result);

@@ -10,10 +10,12 @@ class Home extends Component {
             <div >
                 <AppNavbar/>
                 <header >
-                <Container fluid class="container" >
-                    <Button color="gray" class="vertical-center"><Link to="/restaurants">Manage Restaurants</Link></Button>
-                </Container>
+
                 </header>
+                <Container fluid class="container d-flex" >
+                    <div className="d-flex justify-content-center text-center"><Button color="gray" class="vertical-center text-center"><Link to="/restaurants">Manage Restaurants</Link></Button></div>
+                    <div className="d-flex justify-content-center text-center"><Button color="gray" class="vertical-center text-center"><Link to="/home">Browse Restaurants</Link></Button></div>
+                </Container >
             </div>
         );
     }

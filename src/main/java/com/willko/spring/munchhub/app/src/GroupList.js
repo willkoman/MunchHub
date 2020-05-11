@@ -39,22 +39,6 @@ class GroupList extends Component {
             return <p>Loading...</p>;
         }
 
-        // const groupList = groups.map(group => {
-        //     const address = `${group.address || ''}, ${group.city || ''}, ${group.stateOrProvince || ''},${group.postalCode || ''}`;
-        //     return <tr key={group.id}>
-        //         <td>{group.id}</td>
-        //         <td style={{whiteSpace: 'nowrap'}}>{group.name}</td>
-        //         <td>{address}</td>
-        //         <td>{group.cuisineType}</td>
-        //         <td>
-        //             <ButtonGroup>
-        //                 <Button size="sm" color="primary" tag={Link} to={"/groups/" + group.id}>Edit</Button>
-        //                 <Button size="sm" color="danger" onClick={() => this.remove(group.id)}>Delete</Button>
-        //             </ButtonGroup>
-        //         </td>
-        //     </tr>
-        // });
-
         const groupList = groups.map(group => {
             const address = `${group.address || ''}, ${group.city || ''}, ${group.stateOrProvince || ''},${group.postalCode || ''}`;
             const img = `images/restaurants/${group.id}.jpg`
@@ -63,10 +47,9 @@ class GroupList extends Component {
                 <img className="card-img-top photo" src={img} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title text-center">{group.name}</h5>
-                        <p className="card-text text-center">Sample Text Sample Text</p>
                         <p className="card-text text-center"><i>{address}</i></p>
                         <p className="card-text text-center"><i>Cuisine Type: <b>{group.cuisineType}</b></i></p>
-                        <Button size="md" color="success" className="float-left" >Order Now</Button>
+                        <Button size="md" color="success" className="float-left" tag={Link} to={"/restaurants/" + group.id+"/menu/"} >Order Now</Button>
                         <ButtonGroup className="float-right" >
                             <Button size="sm" color="primary" tag={Link} to={"/restaurants/" + group.id}>Edit</Button>
                             <Button size="sm" color="danger" onClick={() => this.remove(group.id)}>Delete</Button>

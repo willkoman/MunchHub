@@ -18,15 +18,15 @@ class Initializer implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-
+//
 //        Stream.of("McSpankies", "Krusty Shack", "Sushi Supreme",
 //                "Tasty Cream").forEach(name ->
 //                repository.save(new Restaurant(name))
 //        );
 //        Restaurant djug = repository.findByName("McSpankies");
 //        repository.save(djug);
-
-        repository.findAll().forEach(System.out::println);
+//
+//        repository.findAll().forEach(System.out::println);
 
     }
 }

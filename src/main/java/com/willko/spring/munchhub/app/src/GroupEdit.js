@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import ImageUploader from 'react-images-upload';
@@ -12,7 +13,8 @@ class GroupEdit extends Component {
         city: '',
         stateOrProvince: '',
         country: '',
-        postalCode: ''
+        postalCode: '',
+        cuisineType:''
     };
 
     constructor(props) {
@@ -52,10 +54,9 @@ class GroupEdit extends Component {
         if (this.props.match.params.id !== 'new') {
             const group = await (await fetch(`/api/restaurant/${this.props.match.params.id}`)).json();
             this.setState({item: group});
+
         }
     }
-
-
 
     handleChange(event) {
         const target = event.target;
@@ -69,16 +70,19 @@ class GroupEdit extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
-
-        await fetch('/api/restaurant/{id}', {
-            method: (item.id) ? 'PUT' : 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item),
-        });
-        this.props.history.push('/restaurants');
+        if(item.name === '' || item.address==='')
+        alert("Address and/or Name cannot be blank!")
+        else {
+            await fetch('/api/restaurant/{id}', {
+                method: (item.id) ? 'PUT' : 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item),
+            });
+            this.props.history.push('/restaurants');
+        }
     }
 
     render() {
@@ -139,6 +143,12 @@ class GroupEdit extends Component {
                         maxFileSize={3000000}
                     />
                     </div>
+                    <div className="row">
+                        <FormGroup className="col-md-3 mb-3">
+
+                        </FormGroup>
+                    </div>
+
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
                         <Button color="secondary" tag={Link} to="/restaurants">Cancel</Button>
