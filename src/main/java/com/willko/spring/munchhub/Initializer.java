@@ -1,5 +1,6 @@
 package com.willko.spring.munchhub;
 
+import com.willko.spring.munchhub.model.MenuItemRepository;
 import com.willko.spring.munchhub.model.Restaurant;
 import com.willko.spring.munchhub.model.RestaurantRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -11,9 +12,10 @@ import java.util.stream.Stream;
 class Initializer implements CommandLineRunner {
 
     private final RestaurantRepository repository;
-
-    public Initializer(RestaurantRepository repository) {
+    private final MenuItemRepository menuItemRepository;
+    public Initializer(RestaurantRepository repository, MenuItemRepository menuItemRepository) {
         this.repository = repository;
+        this.menuItemRepository=menuItemRepository;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.willko.spring.munchhub.web;
 
 import com.willko.spring.munchhub.model.MenuItem;
+import com.willko.spring.munchhub.model.MenuItemRepository;
 import com.willko.spring.munchhub.model.Restaurant;
 import com.willko.spring.munchhub.model.RestaurantRepository;
 import org.slf4j.Logger;
@@ -13,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.File;
+import java.util.List;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,9 +31,10 @@ class GroupController {
 
     private final Logger log = LoggerFactory.getLogger(GroupController.class);
     private RestaurantRepository restaurantRepository;
-
-    public GroupController(RestaurantRepository restaurantRepository) {
+    private MenuItemRepository menuItemRepository;
+    public GroupController(RestaurantRepository restaurantRepository,MenuItemRepository menuItemRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.menuItemRepository=menuItemRepository;
     }
 
     @GetMapping("/restaurants")
@@ -66,14 +70,21 @@ class GroupController {
     ResponseEntity<Restaurant> updateGroup(@Valid @RequestBody Restaurant restaurant) {
         log.info("Request to update group: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
+        List<MenuItem> items = result.getMenu();
+        for (MenuItem item: items) {
+            item.setRestaurant(restaurant);
+        }
+        menuItemRepository.saveAll(items);
         return ResponseEntity.ok().body(result);
     }
 
-    @PutMapping("/restaurant/{id}/order")
-    ResponseEntity<Restaurant> orderGroup(@Valid @RequestBody Restaurant restaurant) {
-        log.info("Request to update group: {}", restaurant);
-        Restaurant result = restaurantRepository.save(restaurant);
-        return ResponseEntity.ok().body(result);
+    @GetMapping("/restaurant/{id}/order/{item}")
+    ResponseEntity<MenuItem> getOrder(@PathVariable Long id, @PathVariable Long item) {
+        MenuItem group = menuItemRepository.getById(item);
+
+        log.info("attmeptd rest id is "+ id);
+        log.info(group.getItemName());
+        return ResponseEntity.ok().body(group);
     }
 
     @DeleteMapping("/restaurant/{id}")

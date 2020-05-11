@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Button, Container, Table, ButtonGroup, Input, Label } from 'reactstrap';
+import {Button, Container, Table, ButtonGroup, Input, Label, FormGroup, Form} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import NumberFormat from "react-number-format";
+import ImageUploader from "react-images-upload";
 
-class MenuView extends Component {
+class Invoice extends Component {
 
 
 
@@ -22,18 +23,29 @@ class MenuView extends Component {
         }]
     };
 
+    emptyMenuItem={
+        itemName:'',
+        price:0.00
+    }
 
     constructor(props) {
         super(props);
-        this.state = {item: this.emptyItem};
+        this.state = {item: this.emptyItem, menuitem:this.emptyMenuItem};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
+        const parts = window.location.href.split('/');
+        parts.pop();
+        const lastSegment = parts.pop() || parts.pop();
+        parts.pop();
+        const restId= parts.pop();
         if (this.props.match.params.id !== 'new') {
-            const group = await (await fetch(`/api/restaurant/${this.props.match.params.id}/menu`)).json();
-            this.setState({item: group});
+            const menugroup = await (await fetch(`/api/restaurant/${this.props.match.params.id}/order/${parseInt(lastSegment)}`)).json();
+            const group = await (await fetch(`/api/restaurant/${restId}/menu/`)).json();
+            this.setState({item: group,menuitem:menugroup});
+
         }
     }
 
@@ -62,16 +74,17 @@ class MenuView extends Component {
     }
 
     render() {
-        const {item} = this.state;
-        const title = <h2>Order from {item.name}!</h2>;
-        console.log(item);
+        const {item,menuitem} = this.state;
+        // alert(lastSegment);
+
+        const title = <h2>Thank you for ordering the {menuitem.itemName} from {item.name}!</h2>;
         const groupList = item.menu.map(group => {
             return <tr key={group.id}>
                 <td>{group.itemName}</td>
                 <td style={{whiteSpace: 'nowrap'}}><NumberFormat value={group.price} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" type="submit" tag={Link} to={"/restaurants/" + item.id+"/order/"+group.id}>Order</Button>
+                        <Button size="sm" color="primary" type="submit" tag={Link} to={"/restaurants/" + group.id+"/order/"}>Add To Cart</Button>
 
                     </ButtonGroup>
                 </td>
@@ -82,22 +95,33 @@ class MenuView extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     {title}
+                    <h4>Have a wonderful day!</h4>
+                    <br/>
+                    <br/>
+                    <h3>Order Info</h3>
                     <Table className="mt-4">
                         <thead>
                         <tr>
-                            <th width="50%">Name</th>
-                            <th width="30%">Price</th>
+                            <th width="50%">Ordered</th>
+                            <th width="30%">Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {groupList}
+                        <tr key={menuitem.id}>
+                            <td>{menuitem.itemName}</td>
+                            <td style={{whiteSpace: 'nowrap'}}><NumberFormat value={menuitem.price} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
+                        </tr>
                         </tbody>
                     </Table>
-                    <Button color="secondary" tag={Link} to="/restaurants">Cancel</Button>
+                    <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Button color="secondary" tag={Link} to="/home">Back To Restaurants</Button>
+                        </FormGroup>
+                    </Form>
                 </Container>
             </div>
         );
     }
 }
 
-export default withRouter(MenuView);
+export default withRouter(Invoice);
