@@ -7,7 +7,7 @@ This may overwrite the stylesheet but aside from that, should work fine.
 
 Backend is started as per usual through the IDE.
 
-This application simulates a basic online food ordering UX with multiple restaurants.
+This application simulates a basic online food ordering UX utilizing bootstrap with multiple restaurants.
 
 
 This is built upon the Spring/React/JPA stack
